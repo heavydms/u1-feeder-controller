@@ -3,19 +3,22 @@
 Driving Snapmaker U1 filament feeder modules from an ESP32, outside the U1.
 
 The goal is automatic 4-spool TPU switching for a Bambu Lab X2D:
-- two U1 feeder modules (2 lanes each) push the spools into a 4-into-1 merge;
+- two U1 feeder modules (2 lanes each) push the spools into Bambu's 4-in-1 PTFE adapter;
 - a stock Bambu TPU Feed Assist Module takes over from there;
 - the ESP32 presses the assist's Feed, Adjust and Unload buttons through optocouplers.
 
 Nothing inside the printer, the U1 modules or the assist is modified.
 
 ```
-Spool L1 ─┐
-Spool L2 ─┤ U1 feeder 1 ─┐
-Spool R3 ─┤ U1 feeder 2 ─┼─► 4-into-1 merge ─► TPU Feed Assist ─► X2D
-Spool R4 ─┘              │                       ▲ Feed / Unload
-                         │                       │ (PC817 optos)
-                    ESP32-C6 + MCP23017 + DRV8833
+Spool L1 ──┐               ┌── L1 ──┐
+           ├─ U1 feeder 1 ─┤        │
+Spool L2 ──┘               └── L2 ──┤
+                                    ├──► Bambu 4-in-1 ──► TPU Feed Assist ──► X2D
+Spool R3 ──┐               ┌── R3 ──┤                        ▲
+           ├─ U1 feeder 2 ─┤        │                        │ Feed / Adjust / Unload
+Spool R4 ──┘               └── R4 ──┘                        │ (PC817 optos)
+                 ▲                                           │
+                 └───────────── ESP32 controller ────────────┘
 ```
 
 > **Disclaimer.** This is an independent hobby project. It is not affiliated with, endorsed by or supported by
