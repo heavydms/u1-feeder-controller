@@ -10,7 +10,7 @@ open-source Klipper code
 ([`klippy/extras/filament_feed.py`](https://github.com/Snapmaker/u1-klipper/blob/HEAD/klippy/extras/filament_feed.py)).
 
 **The module has no microcontroller.** It is a motor, five Hall-type tach sensors, two inlet sensors and two
-bi-colour LEDs, all wired straight to one 15-pin connector. The printer's board does everything, including the
+bi-color LEDs, all wired straight to one 15-pin connector. The printer's board does everything, including the
 motor H-bridge.
 
 ## Pinout

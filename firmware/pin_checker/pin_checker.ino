@@ -376,7 +376,7 @@ void shortTest() {
   out.println("   Unplug both U1 modules from the breakouts and unplug the 12 V adapter first.");
   out.println("   (Pins are driven high and low; a plugged-in module or live motor rail could react.)");
   if (!confirm("Both U1 modules unplugged and 12 V unplugged?")) {
-    out.println("Cancelled.");
+    out.println("Canceled.");
     return;
   }
   i2cStart();
@@ -564,7 +564,7 @@ void motorPulse(const Feeder &x, bool rightLane, int ms) {
 void motorTest() {
   out.println("\n== Motor test: 150 ms pulse each way on each feeder");
   if (!confirm("12 V plugged in, LM2596 checked at 6.0 V, U1 modules plugged in?")) {
-    out.println("Cancelled.");
+    out.println("Canceled.");
     return;
   }
   liveSetup();
@@ -607,7 +607,7 @@ void feedPulse(const Lane &ln, int ms) {
 void feedTest() {
   out.println("\n== Feed test: 1 s on each lane in turn (L1, L2, R3, R4), filament in all 4 inlets");
   if (!confirm("12 V on, filament in all 4 inlets, outlets clear?")) {
-    out.println("Cancelled.");
+    out.println("Canceled.");
     return;
   }
   liveSetup();
@@ -623,7 +623,7 @@ void laneFeed(int n) {
   const Lane &ln = LANES[n - 1];
   out.printf("\n== Lane %s: 1 s feed (feeder %d, %s high)\n", ln.sticker, ln.feeder + 1, ln.pin);
   if (!confirm("12 V on, filament in, outlets clear?")) {
-    out.println("Cancelled.");
+    out.println("Canceled.");
     return;
   }
   liveSetup();
@@ -639,7 +639,7 @@ void buttonTest() {
     return;
   }
   if (!confirm("This presses the real buttons if the harness is on the assist. Go?")) {
-    out.println("Cancelled.");
+    out.println("Canceled.");
     return;
   }
   mcpSafeInit();

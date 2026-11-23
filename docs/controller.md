@@ -7,6 +7,8 @@ The controller drives two U1 feeder modules (4 lanes) and presses the Feed, Adju
 Feed Assist Module. Status: **bench rig working** (November 2026). All four lanes feed, every sensor reads, and
 all eight LEDs light. The three assist button optos are wired; their bench test is next.
 
+![Wiring diagram](img/wiring.png)
+
 ## Parts
 
 | Part | Job |

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 980" font-family="Helvetica, Arial, sans-serif" font-size="15">
+<style>
+.b{fill:#f6f7f9;stroke:#333;stroke-width:2}
+.h{font-weight:700;font-size:18px}
+.p{font-size:14px;fill:#222}
+.s{font-size:13px;fill:#555}
+.w{stroke-width:2.2;fill:none}
+.pw{stroke:#c0392b}.gn{stroke:#222}.mt{stroke:#d35400}.sn{stroke:#2471a3}.ld{stroke:#7d3c98}.i2{stroke:#1e8449}.op{stroke:#b7950b}
+</style>
+<rect width="1500" height="980" fill="#fff"/>
+<text x="30" y="40" font-size="24" font-weight="700">Two Snapmaker U1 feeder modules on one ESP32-C6 (bench controller)</text>
+<text x="30" y="64" class="s">github.com/heavydms/u1-feeder-controller · by heavydms · pin map from docs/controller.md · every sensor pin: 10 kΩ pull-up to 3V3 · LED inputs: 330 Ω</text>
+
+<!-- Power -->
+<rect x="30" y="100" width="200" height="90" rx="6" class="b"/><text x="45" y="128" class="h">12 V adapter</text>
+<rect x="290" y="100" width="230" height="90" rx="6" class="b"/><text x="305" y="128" class="h">LM2596 buck</text><text x="305" y="152" class="p">IN 12 V → OUT 6.0 V</text><text x="305" y="174" class="s">set to 6.0 V before wiring VM</text>
+<path d="M230 140 H290" class="w pw"/>
+<rect x="590" y="100" width="260" height="200" rx="6" class="b"/><text x="605" y="128" class="h">DRV8833 module</text>
+<text x="605" y="154" class="p">VM ← 6.0 V (max 10.8 V)</text>
+<text x="605" y="178" class="p">IN1 ← GPIO22 · IN2 ← GPIO23</text>
+<text x="605" y="200" class="p">IN3 ← GPIO4 · IN4 ← GPIO5</text>
+<text x="605" y="226" class="p">OUT1/OUT2 → Feeder 1 pins 4/5</text>
+<text x="605" y="250" class="p">OUT3/OUT4 → Feeder 2 pins 4/5</text>
+<text x="605" y="276" class="s">GND common with C6 and both U1 pin 2</text>
+<path d="M520 140 H590" class="w pw"/>
+
+<!-- C6 -->
+<rect x="590" y="360" width="300" height="400" rx="6" class="b"/><text x="605" y="390" class="h">ESP32-C6 DevKitC</text><text x="605" y="410" class="s">powered from USB; 3V3 feeds U1 pin 1 + MCP</text>
+<text x="605" y="440" class="p" font-weight="700">Feeder 1</text>
+<text x="605" y="462" class="p">GPIO10 ← motor tach (pin 3)</text>
+<text x="605" y="482" class="p">GPIO18 ← left tach A (pin 8)</text>
+<text x="605" y="502" class="p">GPIO20 ← right tach A (pin 14)</text>
+<text x="605" y="522" class="p">GPIO2 (ADC) ← left inlet (pin 10)</text>
+<text x="605" y="542" class="p">GPIO3 (ADC) ← right inlet (pin 11)</text>
+<text x="605" y="572" class="p" font-weight="700">Feeder 2</text>
+<text x="605" y="594" class="p">GPIO11 ← motor tach (pin 3)</text>
+<text x="605" y="614" class="p">GPIO6 ← left tach A (pin 8)</text>
+<text x="605" y="634" class="p">GPIO7 ← right tach A (pin 14)</text>
+<text x="605" y="654" class="p">GPIO0 (ADC) ← left inlet (pin 10)</text>
+<text x="605" y="674" class="p">GPIO1 (ADC) ← right inlet (pin 11)</text>
+<text x="605" y="704" class="p" font-weight="700">I2C</text>
+<text x="605" y="726" class="p">GPIO19 SDA · GPIO21 SCL</text>
+<path d="M740 300 V360" class="w mt"/><text x="748" y="335" class="s">IN1–IN4</text>
+
+<!-- Feeders -->
+<rect x="30" y="250" width="420" height="300" rx="6" class="b"/><text x="45" y="278" class="h">U1 feeder 1 (15-pin)</text>
+<text x="45" y="305" class="p">1 V+ (3V3) · 2 GND</text>
+<text x="45" y="327" class="p">3 motor tach · 4/5 motor (bare, ~5.9 Ω)</text>
+<text x="45" y="349" class="p">6 L LED white · 7 L LED red</text>
+<text x="45" y="371" class="p">8 / 9 left wheel tach A / B</text>
+<text x="45" y="393" class="p">10 left inlet (analog) · 11 right inlet</text>
+<text x="45" y="415" class="p">12 R LED red · 13 R LED white</text>
+<text x="45" y="437" class="p">14 / 15 right wheel tach A / B</text>
+<text x="45" y="469" class="s">Pin 4 + / 5 − feeds the right lane; reverse feeds the left.</text>
+<text x="45" y="489" class="s">A short reverse pulse leaves both lanes free (neutral).</text>
+<text x="45" y="509" class="s">Tachs are open-drain; inlet ≈0.85 V empty, &lt;0.11 V filament.</text>
+<rect x="30" y="590" width="420" height="170" rx="6" class="b"/><text x="45" y="618" class="h">U1 feeder 2 (15-pin)</text>
+<text x="45" y="645" class="p">Same pinout as feeder 1.</text>
+<text x="45" y="667" class="p">Motor → DRV8833 OUT3 / OUT4</text>
+<text x="45" y="689" class="p">LEDs 6, 7, 12, 13 → MCP GPA4–GPA7</text>
+<text x="45" y="711" class="p">Tach B (9, 15) → MCP GPB2, GPB3</text>
+<text x="45" y="740" class="s">Lanes: feeder 1 = L1, L2 · feeder 2 = R3, R4</text>
+<path d="M450 400 H590" class="w sn"/><path d="M450 670 H590" class="w sn"/>
+<text x="462" y="392" class="s">tachs, inlets</text><text x="462" y="662" class="s">tachs, inlets</text>
+<path d="M450 300 H520 V250 H590" class="w mt"/><path d="M450 620 H540 V280 H590" class="w mt"/>
+
+<!-- MCP -->
+<rect x="960" y="360" width="500" height="250" rx="6" class="b"/><text x="975" y="390" class="h">MCP23017 (I2C 0x20)</text>
+<text x="975" y="418" class="p">GPA0–GPA3 → feeder 1 LEDs (pins 6, 7, 12, 13)</text>
+<text x="975" y="440" class="p">GPA4–GPA7 → feeder 2 LEDs (pins 6, 7, 12, 13)</text>
+<text x="975" y="462" class="p">GPB0, GPB1 ← feeder 1 tach B (pins 9, 15)</text>
+<text x="975" y="484" class="p">GPB2, GPB3 ← feeder 2 tach B (pins 9, 15)</text>
+<text x="975" y="506" class="p">GPB4 / GPB6 / GPB5 → assist Feed / Adjust / Unload</text>
+<text x="975" y="528" class="p">GPB7 spare</text>
+<text x="975" y="556" class="s">Tach B pulses ~10/s, so polling over I2C at ~1 kHz keeps up.</text>
+<text x="975" y="578" class="s">LED inputs through 330 Ω, high = on.</text>
+<path d="M890 720 H930 V480 H960" class="w i2"/><text x="898" y="745" class="s">SDA/SCL</text>
+
+<!-- Assist optos -->
+<rect x="960" y="660" width="500" height="200" rx="6" class="b"/><text x="975" y="690" class="h">Assist buttons: 3 × PC817</text>
+<text x="975" y="718" class="p">Pin 1 ← MCP GPB4/6/5 through 330 Ω · pin 2 → C6 GND</text>
+<text x="975" y="740" class="p">Pins 4 / 3 across each button (higher side / ground side)</text>
+<text x="975" y="762" class="p">Feed, Adjust, Unload on a Bambu TPU Feed Assist</text>
+<text x="975" y="792" class="s">The button still works by hand; unplugging the harness</text>
+<text x="975" y="812" class="s">returns the assist to stock. The two sides share no ground.</text>
+<path d="M1210 610 V660" class="w op"/>
+
+<text x="30" y="920" class="s">Unofficial, not affiliated with Snapmaker or Bambu Lab. Measured on two modules; check your own hardware before applying power. Use at your own risk, no warranty.</text>
+</svg>
